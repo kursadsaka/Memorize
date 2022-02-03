@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemoryGameView.swift
 //  Memorize
 //
 //  Created by Kürşad Saka on 22.01.2022.
@@ -7,27 +7,23 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     
-    var emojis = ["🚗", "🚕", "🚙", "🚌", "🚎", "🏎", "🚓", "🚑", "🚒", "🚐", "🛻", "🚚", "🚛", "🚜"]
-    @State var emojiCount = 4
+    @ObservedObject var game: EmojiMemoryGame
     
     var body: some View {
         
-        VStack {
-            
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 85))]) {
-                    ForEach(emojis[0..<emojiCount], id: \.self) {emoji in
-                        CardView(content: emoji).aspectRatio(2/3, contentMode: .fit)
-                    }
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 85))]) {
+                ForEach(game.cards) {card in
+                    CardView(card: card)
+                        .aspectRatio(2/3, contentMode: .fit)
+                        .onTapGesture {game.choose(card)}
                 }
             }
-            .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
-            
         }
+        .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
         .padding(.horizontal)
-        
         
     }
     
@@ -35,8 +31,7 @@ struct ContentView: View {
 
 struct CardView: View {
     
-    var content: String
-    @State var isFaceUp: Bool = true
+    let card: MemoryGame<String>.Card
     
     var body: some View {
         
@@ -63,10 +58,16 @@ struct CardView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        ContentView()
+        
+        let game = EmojiMemoryGame()
+        
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.light)
-        ContentView()
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.dark)
+        
     }
+    
 }
