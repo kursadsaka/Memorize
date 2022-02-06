@@ -1,7 +1,7 @@
 //
 //  EmojiMemoryGameView.swift
 //  Memorize
-//  deneme
+//
 //  Created by Kürşad Saka on 22.01.2022.
 //
 
