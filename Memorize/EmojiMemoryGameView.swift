@@ -33,7 +33,11 @@ struct EmojiMemoryGameView: View {
             else {
                 CardView(card: card)
                     .padding(4)
-                    .onTapGesture {game.choose(card)}
+                    .onTapGesture {
+                        withAnimation {
+                            game.choose(card)
+                        }
+                    }
             }
         }
         .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
@@ -42,13 +46,17 @@ struct EmojiMemoryGameView: View {
     
     var shuffle: some View {
         Button("Shuffle") {
-            game.shuffle()
+            withAnimation {
+                game.shuffle()
+            }
         }
     }
     
     var restart: some View {
         Button("Restart") {
-            game.restart()
+            withAnimation {
+                game.restart()
+            }
         }
     }
     
