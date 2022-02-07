@@ -14,7 +14,11 @@ struct EmojiMemoryGameView: View {
     var body: some View {
         VStack {
             gameBody
-            shuffle
+            HStack {
+                restart
+                Spacer()
+                shuffle
+            }
         }
         .padding()
         
@@ -39,6 +43,12 @@ struct EmojiMemoryGameView: View {
     var shuffle: some View {
         Button("Shuffle") {
             game.shuffle()
+        }
+    }
+    
+    var restart: some View {
+        Button("Restart") {
+            game.restart()
         }
     }
     

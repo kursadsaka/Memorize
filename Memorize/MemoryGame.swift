@@ -38,6 +38,14 @@ struct MemoryGame<CardContent: Equatable> {
         cards.shuffle()
     }
     
+    mutating func restart() {
+        cards.indices.forEach {
+            cards[$0].isFaceUp = false
+            cards[$0].isMatched = false
+        }
+        shuffle()
+    }
+    
     init (numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
         cards = []
         for pairIndex in 0..<numberOfPairsOfCards {
