@@ -35,7 +35,7 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     func restart() {
-        model.restart()
+        model = EmojiMemoryGame.createMemoryGame()
     }
     
 }

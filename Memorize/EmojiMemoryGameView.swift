@@ -22,6 +22,7 @@ struct EmojiMemoryGameView: View {
                 Spacer()
                 shuffle
             }
+            .padding(.horizontal )
         }
         .padding()
         
@@ -104,6 +105,15 @@ struct EmojiMemoryGameView: View {
         }
     }
     
+    var restart: some View {
+        Button("Restart") {
+            withAnimation {
+                dealt = []
+                game.restart()
+            }
+        }
+    }
+    
     private struct CardConstants {
         static let color = Color.red
         static let aspectRatio: CGFloat = 2/3
@@ -111,14 +121,6 @@ struct EmojiMemoryGameView: View {
         static let totalDealDuration: Double = 2
         static let undealtHeight: CGFloat = 90
         static let undealtWidth: CGFloat = undealtHeight * aspectRatio
-    }
-    
-    var restart: some View {
-        Button("Restart") {
-            withAnimation {
-                game.restart()
-            }
-        }
     }
     
 //    @ViewBuilder
